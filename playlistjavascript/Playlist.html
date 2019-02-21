@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Play list</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <script scr="/assets/js/jquery.min.js"></script>
+    <script scr="/assets/js/pooper.min.js"></script>
+    <script scr="/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      var lagu = ["01_Alone.mp3","06 Marshmello Blocks.mp3","Awaken.mp3"];
+      var album = ["PNGPlaylist.png","PNGPlaylist.png","PNGPlaylist.png"];
+      function FirstLoad() {
+        //digunakan untuk menemampilkan playlistt dari array
+        for (var i = 0; i < lagu.length; i++) {
+          var element ="";
+          element += "<li class='list-group-item' ";
+          element += "onclick='Choose("+i+")'>";
+          element += lagu[i]+"</li>";
+          //gabungakan ke element id="playlist"
+          document.getElementById('playlist').innerHTML += element;
+        }
+      }
+
+      function Choose(index) {
+        //ambil element audio
+        var audio = document.getElementById('audio');
+        //set source dari audio tersebut
+        audio.src = lagu[index];
+        //play audionya
+        audio.play();
+
+        //ambil element album
+        var picture = document.getElementById('album');
+        //set source image
+        picture.src = album[index];
+        picture.style.width = "100%";
+      }
+      function Play () {
+        //Ambil element audionya
+        document.getElementById('audio').pause();
+      }
+      function stop (){
+          document.getElementById('audio').pause();
+          document.getElementById('audio').currentTime = 0;
+      }
+    </script>
+  </head>
+  <body onload="FirstLoad();">
+    <div class="container">
+      <div class="card col-sm-6">
+        <div class="card-header bg-danger text-white text-center">
+          <h4> My Playlist</h4>
+        </div>
+        <div class="card-body">
+
+          <div class="col-sm-12">
+            <img src="" class="img" id="album" >
+          </div>
+
+          <audio src="" id="audio">
+
+          </audio>
+
+          <div class="btn-group">
+            <button type="button" class="col-sm-4 btn btn-warning"
+            onclick="Pause();">
+              Pause
+            </button>
+            <button type="button" class="col-sm-4 btn btn-succes"
+            onclick="Play();">
+              Play
+            </button>
+            <button type="button" class="col-sm-4 btn btn-danger"
+            onclick="stop();">
+              stop
+            </button>
+          </div>
+
+          <div class="col-sm-12" id="playlist">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
